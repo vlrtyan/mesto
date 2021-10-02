@@ -1,0 +1,87 @@
+@import url(../vendor/normalize.css);
+
+@import url(../blocks/page/page.css);
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/__logo/header__logo.css);
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__name/profile__name.css);
+@import url(../blocks/profile/__description/profile__description.css);
+
+
+.profile__avatar{
+    border-radius: 50%;
+}
+
+.profile__edit-button{
+    margin: 0;
+    display: inline-block;
+    background-color: black;
+    border: 1px solid white;
+}
+
+.profile__add-button{
+    margin: 0;
+    padding: 14px 64px;
+    display: inline-block;
+    background-color: black;
+    border: 1px solid white;
+}
+
+.elements{
+    margin: 0 auto 66px auto;
+    max-width: 880px;
+    width: calc(100% - 2 * 200px);
+    display: grid;
+    row-gap: 20px;
+    column-gap: 17px;
+    grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+    grid-template-rows: auto;
+    outline: 1px solid greenyellow;
+}
+
+.element{
+    
+}
+
+.element__image{
+    margin: 0;
+    width: 282px;
+    height: 282px;
+    object-fit: cover;
+}
+
+.element__info{
+    max-width: calc(282px - 15px - 21px);
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 25px 15px 31px 21px;
+    
+}
+
+.element__title{
+    margin: 0;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+    text-align: center;
+}
+
+.element__like-button{
+    margin: 0;
+    display: inline-block;
+    background-color: white;
+    border: 1px solid white;
+}
+
+.footer{
+    margin: 0 auto 60px auto;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    color: #545454;
+}
