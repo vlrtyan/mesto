@@ -11,59 +11,12 @@
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 
-
-
-
-.elements{
-    margin: 0 auto 66px auto;
-    max-width: 880px;
-    width: calc(100% - 2 * 200px);
-    display: grid;
-    row-gap: 20px;
-    column-gap: 17px;
-    grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
-    grid-template-rows: auto;
-    outline: 1px solid greenyellow;
-}
-
-.element{
-    
-}
-
-.element__image{
-    margin: 0;
-    width: 282px;
-    height: 282px;
-    object-fit: cover;
-}
-
-.element__info{
-    max-width: calc(282px - 15px - 21px);
-    margin: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    background-color: white;
-    padding: 25px 15px 31px 21px;
-    
-}
-
-.element__title{
-    margin: 0;
-    font-weight: 900;
-    font-size: 24px;
-    line-height: 29px;
-    color: #000000;
-    text-align: center;
-}
-
-.element__like-button{
-    margin: 0;
-    display: inline-block;
-    background-color: white;
-    border: 1px solid white;
-}
+@import url(../blocks/elements/elements.css);
+@import url(../blocks/element/element.css);
+@import url(../blocks/element/__image/element__image.css);
+@import url(../blocks/element/__info/element__info.css);
+@import url(../blocks/element/__title/element__title.css);
+@import url(../blocks/element/__like-button/element__like-button.css);
 
 .footer{
     margin: 0 auto 60px auto;
