@@ -4,48 +4,15 @@
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
 @import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__description/profile__description.css);
+@import url(../blocks/profile/__edit-button/profile__edit-button.css);
+@import url(../blocks/profile/__add-button/profile__add-button.css);
 
 
 
-.profile__info{
-    margin: 0;
-    display: grid;
-    grid-template-columns: 294fr 18px;
-    grid-template-rows: auto;
-    grid-template-areas: 
-    "profile__name profile__edit-button"
-    "profile__description .";
-    row-gap: 16px;
-    column-gap: 18px;
-    justify-items: start;
-    align-items: center;
-}
-
-.profile__avatar{
-    margin: 0;
-    margin-right: 12px;
-    border-radius: 50%;
-}
-
-.profile__edit-button{
-    width: 24px;
-    height: 24px;
-    margin: 0;
-    background-color: black;
-    border: 1px solid white;
-    grid-area: profile__edit-button;
-}
-
-.profile__add-button{
-    margin: 0;
-    padding: 14px 64px;
-    background-color: black;
-    border: 1px solid white;
-    margin-left: auto;
-    
-}
 
 .elements{
     margin: 0 auto 66px auto;
