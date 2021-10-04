@@ -7,3 +7,11 @@
     line-height: 22px;
     color: #545454;
 }
+
+@media screen and (max-width: 980px){
+    .footer{
+        font-size: 14px;
+        line-height: 17px;
+        width: calc(100% - 2 * 19px);
+        }
+    }
