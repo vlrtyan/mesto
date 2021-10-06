@@ -1,7 +1,8 @@
 .footer{
     max-width: 880px;
     width: calc(100% - 2 * 200px);
-    margin: 0 auto 60px auto;
+    margin: 0 auto;
+    padding-bottom: 60px;
     font-weight: normal;
     font-size: 18px;
     line-height: 22px;
@@ -13,5 +14,6 @@
         font-size: 14px;
         line-height: 17px;
         width: calc(100% - 2 * 19px);
+        padding-bottom: 36px;
         }
     }
