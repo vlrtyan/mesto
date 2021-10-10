@@ -12,7 +12,3 @@
     opacity: 0.5;
     transition: 0.3s;
 }
-
-.element__like-button_clicked{
-    background-image: url(../../../images/like-button-clicked.svg);
-}
