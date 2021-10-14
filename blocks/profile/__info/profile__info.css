@@ -12,7 +12,7 @@
     align-items: center;
 }
 
-@media screen and (max-width: 980px){
+@media screen and (max-width: 1110px){
     .profile__info{
         justify-items: center;
         margin-bottom: 36px;

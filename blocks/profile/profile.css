@@ -8,7 +8,7 @@
     justify-content: flex-start;
 }
 
-@media screen and (max-width: 980px){
+@media screen and (max-width: 1110px){
     .profile{
         margin-bottom: 36px;
         width: calc(100% - 2 * 19px);
