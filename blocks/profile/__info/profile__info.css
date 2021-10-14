@@ -1,7 +1,7 @@
 .profile__info{
     margin: 0;
     display: grid;
-    grid-template-columns: 294fr 18px;
+    grid-template-columns: 1fr 18px;
     grid-template-rows: auto;
     grid-template-areas: 
     "profile__name profile__edit-button"
@@ -16,9 +16,11 @@
     .profile__info{
         justify-items: center;
         margin-bottom: 36px;
-        grid-template-columns: 18px 294fr 18px;
+        grid-template-columns: 18px 1fr 18px;
         grid-template-areas: 
         ". profile__name profile__edit-button"
         ". profile__description .";
+        row-gap: 14px;
+        column-gap: 10px;
         }
     }
