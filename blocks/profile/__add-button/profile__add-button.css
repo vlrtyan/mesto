@@ -5,6 +5,7 @@
     background-color: black;
     border: 1px solid white;
     margin-left: auto;
+    border-radius: 2px;
     cursor: pointer;
 }
 
