@@ -8,7 +8,9 @@ const descriptionField = document.querySelector('.popup__input_type_description'
 const descriptionProfile = document.querySelector('.profile__description');
 
 function openPopup(){
-    popup.classList.add('popup_opened')
+    nameField.placeholder.value = nameProfile.textContent;
+    descriptionField.placeholder.value = descriptionProfile.textContent;
+    popup.classList.add('popup_opened');
 }
 
 function closePopup(){
