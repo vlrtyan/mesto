@@ -15,7 +15,6 @@
 @media screen and (max-width: 1110px){
     .profile__info{
         justify-items: center;
-        margin-bottom: 36px;
         grid-template-columns: 18px 1fr 18px;
         grid-template-areas: 
         ". profile__name profile__edit-button"
