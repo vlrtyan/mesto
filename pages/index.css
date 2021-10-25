@@ -31,3 +31,12 @@
 @import url(../blocks/popup/__submit-button/popup__submit-button.css);
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
+
+@import url(../blocks/new-item/new-item.css);
+@import url(../blocks/new-item/__close-button/new-item__close-button.css);
+@import url(../blocks/new-item/__container/new-item__container.css);
+@import url(../blocks/new-item/__form/new-item__form.css);
+@import url(../blocks/new-item/__input/new-item__input.css);
+@import url(../blocks/new-item/__submit-button/new-item__submit-button.css);
+@import url(../blocks/new-item/__title/new-item__title.css);
+@import url(../blocks/new-item/_opened/new-item_opened.css);
