@@ -92,5 +92,14 @@ const initialCards = [
     }
   ];
 
+const elements = document.querySelector('.elements');
+const templateCard = document.querySelector('#templateCard').content;
 
-const templateCard = document.querySelector('.template').content;
+function addCard(item){
+    const element = templateCard.querySelector('.element').cloneNode(true);
+    element.querySelector('.element__title').innerText = item.name;
+    element.querySelector('.element__image').setAttribute('src', item.link);
+    elements.append(element);
+}
+
+initialCards.forEach (addCard);
