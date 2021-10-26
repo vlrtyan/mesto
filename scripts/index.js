@@ -60,10 +60,15 @@ const initialCards = [
 const elements = document.querySelector('.elements');
 const templateCard = document.querySelector('#templateCard').content;
 
+function like(event){
+    event.target.classList.toggle('element__like-button_clicked');
+}
+
 function createCard(item){
     const element = templateCard.querySelector('.element').cloneNode(true);
     element.querySelector('.element__title').innerText = item.name;
     element.querySelector('.element__image').setAttribute('src', item.link);
+    element.querySelector('.element__like-button').addEventListener('click', like);
     return element;
 }
 
@@ -110,7 +115,3 @@ addButton.addEventListener('click', openNewItem);
 newItemFormCloseButton.addEventListener('click', closeNewItem);
 
 newItemForm.addEventListener('submit', sumbitNewItemForm);
-
-function like(event){
-    
-}
