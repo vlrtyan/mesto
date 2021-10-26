@@ -60,16 +60,21 @@ const initialCards = [
 const elements = document.querySelector('.elements');
 const templateCard = document.querySelector('#templateCard').content;
 
-function like(event){
-    event.target.classList.toggle('element__like-button_clicked');
-}
-
 function createCard(item){
     const element = templateCard.querySelector('.element').cloneNode(true);
     element.querySelector('.element__title').innerText = item.name;
     element.querySelector('.element__image').setAttribute('src', item.link);
     element.querySelector('.element__like-button').addEventListener('click', like);
+    element.querySelector('.element__delete-button').addEventListener('click', deleteCard);
     return element;
+}
+
+function deleteCard(event){
+    event.target.closest('.element').remove();
+}
+
+function like(event){
+    event.target.classList.toggle('element__like-button_clicked');
 }
 
 function addCard(item){
@@ -103,8 +108,7 @@ function sumbitNewItemForm(event){
     const name = placeNameField.value;
     const link = imageField.value;
     const item = {
-        name: name,
-        link: link
+        name, link
     }
     addCard(item);
     closeNewItem();
