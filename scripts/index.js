@@ -24,6 +24,10 @@ function sumbitForm(event){
     closePopup();
 }
 
+window.addEventListener('load', ()=> {
+    document.querySelectorAll('.popup').forEach((popup) => popup.classList.add('popup__transition'));
+  })
+
 editButton.addEventListener('click', openPopup)
 
 popupCloseButton.addEventListener('click', closePopup)

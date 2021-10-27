@@ -4,8 +4,11 @@
     right: 0px;
     bottom: 0px;
     left: 0px;
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     background: rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+    opacity: 0;
+    
 }
