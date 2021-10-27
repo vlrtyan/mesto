@@ -66,6 +66,8 @@ function createCard(item){
     element.querySelector('.element__image').setAttribute('src', item.link);
     element.querySelector('.element__like-button').addEventListener('click', like);
     element.querySelector('.element__delete-button').addEventListener('click', deleteCard);
+    element.querySelector('.element__image').addEventListener('click', openImagePopup);
+
     return element;
 }
 
@@ -119,3 +121,20 @@ addButton.addEventListener('click', openNewItem);
 newItemFormCloseButton.addEventListener('click', closeNewItem);
 
 newItemForm.addEventListener('submit', sumbitNewItemForm);
+
+const imagePopup = document.querySelector('.image-popup');
+const imagePopupCloseButton = document.querySelector('.image-popup__close-button');
+const bigImage = document.querySelector('.image-popup__image');
+const bigImageTitle = document.querySelector('.image-popup__title');
+
+function openImagePopup(event){
+    bigImage.setAttribute('src', event.target.getAttribute('src'));
+    bigImageTitle.textContent = event.target.textContent;
+    imagePopup.classList.add('image-popup_opened');
+}
+
+document.querySelector('.image-popup__close-button').addEventListener('click', closeImagePopup);
+
+function closeImagePopup(){
+    imagePopup.classList.remove('image-popup_opened')
+}
