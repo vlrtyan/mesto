@@ -89,7 +89,7 @@ function closePopup(popup){
 function openImagePopup(event){
     const bigImage = document.querySelector('.image-popup__image');
     bigImage.setAttribute('src', event.target.getAttribute('src'));
-    bigImage.setAttribute('alt', event.target.textContent);
+    bigImage.setAttribute('alt', event.target.closest('.element').textContent);
     document.querySelector('.image-popup__title').textContent = event.target.closest('.element').textContent;
     openPopup(imagePopup);
 }
