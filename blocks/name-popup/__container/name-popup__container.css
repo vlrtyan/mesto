@@ -1,4 +1,4 @@
-.popup__container{
+.name-popup__container{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -11,7 +11,7 @@
 }
 
 @media screen and (max-width: 980px){
-    .popup__container{
+    .name-popup__container{
         min-width: 282px; 
         }
     }

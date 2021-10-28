@@ -6,10 +6,3 @@
     align-items: flex-start;
     position: relative;
 }
-
-/*@media screen and (max-width: 980px){
-    .popup__container{
-        min-width: 282px; 
-        }
-    }
-}
