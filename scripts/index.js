@@ -32,6 +32,7 @@ function createCard(item){
     const element = templateCard.querySelector('.element').cloneNode(true);
     element.querySelector('.element__title').innerText = item.name;
     element.querySelector('.element__image').setAttribute('src', item.link);
+    element.querySelector('.element__image').setAttribute('alt', item.name);
     element.querySelector('.element__like-button').addEventListener('click', like);
     element.querySelector('.element__delete-button').addEventListener('click', deleteCard);
     element.querySelector('.element__image').addEventListener('click', openImagePopup);
@@ -57,7 +58,7 @@ initialCards.forEach (addCard);
 const popup = document.querySelector('.popup');
 const namePopup =document.querySelector('.name-popup');
 const editButton = document.querySelector('.profile__edit-button');
-const namePopupCloseButton = document.querySelector('.name-popup__close-button');
+const closeButton = document.querySelector('.popup__close-button');
 const nameForm = document.querySelector('.name-popup__form');
 const nameField = document.querySelector('.name-popup__input_type_name');
 const nameProfile = document.querySelector('.profile__name');
@@ -66,7 +67,6 @@ const descriptionProfile = document.querySelector('.profile__description');
 
 const newItemPopup = document.querySelector('.new-item');
 const addButton = document.querySelector('.profile__add-button');
-const newItemPopupCloseButton = document.querySelector('.new-item__close-button');
 const newItemForm = document.querySelector('.new-item__form');
 const placeNameField = document.querySelector('.new-item__input_type_name');
 const placeNameCard = document.querySelector('.element__title');
@@ -74,7 +74,7 @@ const imageField = document.querySelector('.new-item__input_type_link');
 const imageCard = document.querySelector('.element__image');
 
 const imagePopup = document.querySelector('.image-popup');
-const imagePopupCloseButton = document.querySelector('.image-popup__close-button');
+const bigImage = document.querySelector('.image-popup__image');
 
 window.addEventListener('load', () => {
     document.querySelectorAll('.popup').forEach((popup) => popup.classList.add('popup__transition'));
@@ -83,11 +83,12 @@ window.addEventListener('load', () => {
 function openPopup(popup){
     popup.classList.add('popup_opened');
 }
-function closePopup(popup){
-    popup.classList.remove('popup_opened')
+
+function closePopup(event){
+    event.target.closest('.popup').classList.remove('popup_opened');
 }
+
 function openImagePopup(event){
-    const bigImage = document.querySelector('.image-popup__image');
     bigImage.setAttribute('src', event.target.getAttribute('src'));
     bigImage.setAttribute('alt', event.target.closest('.element').textContent);
     document.querySelector('.image-popup__title').textContent = event.target.closest('.element').textContent;
@@ -106,9 +107,7 @@ addButton.addEventListener('click', () => {
     openPopup(newItemPopup);
 })
 
-namePopupCloseButton.addEventListener('click', () => closePopup(namePopup))
-newItemPopupCloseButton.addEventListener('click', () => closePopup(newItemPopup))
-imagePopupCloseButton.addEventListener('click', () => closePopup(imagePopup))
+document.querySelectorAll('.popup__close-button').forEach((closeButton) => closeButton.addEventListener('click', closePopup));
 
 function sumbitNameForm(event){
     event.preventDefault();
