@@ -55,10 +55,10 @@ function addCard(item){
 
 initialCards.forEach (addCard);
 
-const popup = document.querySelector('.popup');
-const namePopup =document.querySelector('.name-popup');
+const popup = document.querySelectorAll('.popup');
+const namePopup = document.querySelector('.name-popup');
 const editButton = document.querySelector('.profile__edit-button');
-const closeButton = document.querySelector('.popup__close-button');
+//const closeButton = document.querySelectorAll('.popup__close-button');
 const nameForm = document.querySelector('.name-popup__form');
 const nameField = document.querySelector('.name-popup__input_type_name');
 const nameProfile = document.querySelector('.profile__name');
@@ -84,8 +84,8 @@ function openPopup(popup){
     popup.classList.add('popup_opened');
 }
 
-function closePopup(event){
-    event.target.closest('.popup').classList.remove('popup_opened');
+function closePopup(popup){ 
+    popup.classList.remove('popup_opened');
 }
 
 function openImagePopup(event){
@@ -107,7 +107,13 @@ addButton.addEventListener('click', () => {
     openPopup(newItemPopup);
 })
 
-document.querySelectorAll('.popup__close-button').forEach((closeButton) => closeButton.addEventListener('click', closePopup));
+const closeButton = document.querySelectorAll('.popup__close-button');
+for (let i = 0; i < closeButton.length; i++) {
+   closeButton[i].addEventListener('click', function() {
+      const popup = closeButton[i].closest('.popup');
+      closePopup(popup);
+   });
+}
 
 function sumbitNameForm(event){
     event.preventDefault();
