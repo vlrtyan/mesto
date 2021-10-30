@@ -55,10 +55,8 @@ function addCard(item){
 
 initialCards.forEach (addCard);
 
-const popup = document.querySelectorAll('.popup');
 const namePopup = document.querySelector('.name-popup');
 const editButton = document.querySelector('.profile__edit-button');
-//const closeButton = document.querySelectorAll('.popup__close-button');
 const nameForm = document.querySelector('.name-popup__form');
 const nameField = document.querySelector('.name-popup__input_type_name');
 const nameProfile = document.querySelector('.profile__name');
