@@ -37,10 +37,28 @@
           <div class="name-popup__container">
             <button class="popup__close-button" type="button"></button>
             <h3 class="name-popup__title">Редактировать профиль</h3>
-            <form class="name-popup__form" name="edit-profile">
-              <input type="text" placeholder="Жак-Ив Кусто" class="name-popup__input name-popup__input_type_name" name="fullname">
-              <input type="text" placeholder="Исследователь океана" class="name-popup__input name-popup__input_type_description" name="description">
-              <button class="name-popup__submit-button" type="submit">Сохранить</button>
+            <form class="popup__form name-popup__form" name="edit-profile" novalidate>
+              <input 
+              type="text" 
+              placeholder="Жак-Ив Кусто" 
+              class="popup__input name-popup__input name-popup__input_type_name" 
+              name="fullname"
+              id="fullname"
+              required 
+              minlength="2" 
+              maxlength="40">
+              <span class="error" id="fullname-error"></span>
+              <input 
+              type="text" 
+              placeholder="Исследователь океана" 
+              class="popup__input name-popup__input name-popup__input_type_description" 
+              name="description"
+              id="description"
+              required 
+              minlength="2" 
+              maxlength="200">
+              <span class="error" id="description-error"></span>
+              <button class="name-popup__submit-button popup__submit-button" type="submit">Сохранить</button>
             </form>
           </div>
         </div>
@@ -49,10 +67,26 @@
           <div class="new-item__container">
             <button class="popup__close-button" type="button"></button>
             <h3 class="new-item__title">Новое место</h3>
-            <form class="new-item__form" name="edit-profile">
-              <input type="text" placeholder="Название" class="new-item__input new-item__input_type_name" name="name">
-              <input type="text" placeholder="Ссылка на картинку" class="new-item__input new-item__input_type_link" name="link">
-              <button class="new-item__submit-button" type="submit">Создать</button>
+            <form class="popup__form new-item__form" name="edit-profile" novalidate>
+              <input 
+              type="text" 
+              placeholder="Название" 
+              class="popup__input new-item__input new-item__input_type_name" 
+              name="name"
+              id="place-name"
+              required
+              minlength="2"
+              maxlength="30">
+              <span class="error" id="place-name-error"></span>
+              <input 
+              type="url" 
+              placeholder="Ссылка на картинку" 
+              class="popup__input new-item__input new-item__input_type_link" 
+              name="link"
+              id="place-link"
+              required>
+              <span class="error" id="place-link-error"></span>
+              <button class="new-item__submit-button popup__submit-button" type="submit">Создать</button>
             </form>
           </div>
         </div>
@@ -78,5 +112,6 @@
     </template>
 
 <script src="scripts/index.js"></script>
+<script src="scripts/validate.js"></script>
 </body>
 </html>

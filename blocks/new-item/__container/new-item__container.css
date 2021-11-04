@@ -1,4 +1,6 @@
 .new-item__container{
+    max-height: 330px;
+    max-width: 430px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
