@@ -89,7 +89,7 @@ function closePopup(popup){
     popup.classList.remove('popup_opened');
 }
 popupArray.forEach((popup) => {
-  popup.addEventListener('click', popupClickHandler);
+  popup.addEventListener('mouseup', popupClickHandler);
 });
 
 function popupClickHandler(event){
@@ -100,9 +100,11 @@ function popupClickHandler(event){
 
 function escHandler(event){
   if (event.key === 'Escape'){
-    popupArray.forEach((popup) => closePopup(popup));
-  };
-}
+    popupArray.forEach((popup) => {
+      if (popup.classList.contains('popup_opened')){
+      closePopup(popup)};
+  });
+}}
 
 function openImagePopup(event){
     bigImage.setAttribute('src', event.target.getAttribute('src'));
