@@ -79,19 +79,19 @@ window.addEventListener('load', () => {
     document.querySelectorAll('.popup').forEach((popup) => popup.classList.add('popup__transition'));
   })
 
-  function popupClickHandler(event){
-    if (event.target.classList.contains('popup')){
-      closePopup(event.target.closest('.popup'));
-    };
-  }
+function popupClickHandler(event) {
+  if (event.target.classList.contains('popup')) {
+    closePopup(event.target.closest('.popup'));
+  };
+}
 
-  function escHandler(event){
-    const openedPopup = document.querySelector('.popup_opened');
-    if (event.key === 'Escape'){
-      //console.log('closed');
-      closePopup(openedPopup);
-    };
-  }  
+function escHandler(event) {
+  const openedPopup = document.querySelector('.popup_opened');
+  if (event.key === 'Escape') {
+    //console.log('closed');
+    closePopup(openedPopup);
+  };
+}
 
 function openPopup(popup){
     document.addEventListener('keydown', escHandler);
