@@ -55,6 +55,7 @@ function addCard(item){
 
 initialCards.forEach (addCard);
 
+const popupArray = Array.from(document.querySelectorAll('.popup'));
 const namePopup = document.querySelector('.name-popup');
 const editButton = document.querySelector('.profile__edit-button');
 const nameForm = document.querySelector('.name-popup__form');
@@ -78,12 +79,29 @@ window.addEventListener('load', () => {
     document.querySelectorAll('.popup').forEach((popup) => popup.classList.add('popup__transition'));
   })
 
+document.addEventListener('keydown', escHandler);
+
 function openPopup(popup){
     popup.classList.add('popup_opened');
 }
 
 function closePopup(popup){ 
     popup.classList.remove('popup_opened');
+}
+popupArray.forEach((popup) => {
+  popup.addEventListener('click', popupClickHandler);
+});
+
+function popupClickHandler(event){
+  if (event.target.classList.contains('popup')){
+    closePopup(event.target.closest('.popup'));
+  };
+}
+
+function escHandler(event){
+  if (event.key === 'Escape'){
+    popupArray.forEach((popup) => closePopup(popup));
+  };
 }
 
 function openImagePopup(event){
