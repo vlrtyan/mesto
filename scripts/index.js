@@ -79,32 +79,31 @@ window.addEventListener('load', () => {
     document.querySelectorAll('.popup').forEach((popup) => popup.classList.add('popup__transition'));
   })
 
-document.addEventListener('keydown', escHandler);
+  function popupClickHandler(event){
+    if (event.target.classList.contains('popup')){
+      closePopup(event.target.closest('.popup'));
+    };
+  }
+
+  function escHandler(event){
+    const openedPopup = document.querySelector('.popup_opened');
+    if (event.key === 'Escape'){
+      //console.log('closed');
+      closePopup(openedPopup);
+    };
+  }  
 
 function openPopup(popup){
+    document.addEventListener('keydown', escHandler);
+    popup.addEventListener('mouseup', popupClickHandler);
     popup.classList.add('popup_opened');
 }
 
 function closePopup(popup){ 
     popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', escHandler);
+    popup.removeEventListener('mouseup', popupClickHandler);
 }
-popupArray.forEach((popup) => {
-  popup.addEventListener('mouseup', popupClickHandler);
-});
-
-function popupClickHandler(event){
-  if (event.target.classList.contains('popup')){
-    closePopup(event.target.closest('.popup'));
-  };
-}
-
-function escHandler(event){
-  if (event.key === 'Escape'){
-    popupArray.forEach((popup) => {
-      if (popup.classList.contains('popup_opened')){
-      closePopup(popup)};
-  });
-}}
 
 function openImagePopup(event){
     bigImage.setAttribute('src', event.target.getAttribute('src'));
