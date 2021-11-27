@@ -1,3 +1,6 @@
+import Card from '/scripts/Card.js';
+import FormValidator from '/scripts/FormValidator.js';
+
 const initialCards = [
     {
       name: 'Архыз',
@@ -26,34 +29,29 @@ const initialCards = [
   ];
 
 const elements = document.querySelector('.elements');
-const templateCard = document.querySelector('#templateCard').content;
+
+initialCards.forEach((item) => {
+  const card = new Card(item.name, item.link);
+  const cardElement = card.generateCard();
+  elements.prepend(cardElement);
+})
+
 
 function createCard(item){
-    const element = templateCard.querySelector('.element').cloneNode(true);
-    element.querySelector('.element__title').innerText = item.name;
-    element.querySelector('.element__image').setAttribute('src', item.link);
-    element.querySelector('.element__image').setAttribute('alt', item.name);
-    element.querySelector('.element__like-button').addEventListener('click', like);
-    element.querySelector('.element__delete-button').addEventListener('click', deleteCard);
-    element.querySelector('.element__image').addEventListener('click', openImagePopup);
-
-    return element;
+  const card = new Card(item, template);
+  return card;
 }
 
-function deleteCard(event){
-    event.target.closest('.element').remove();
-}
 
-function like(event){
-    event.target.classList.toggle('element__like-button_clicked');
-}
+
+
+
 
 function addCard(item){
     const element = createCard(item);
-    elements.prepend(element);
+    
 }
 
-initialCards.forEach (addCard);
 
 const popupArray = Array.from(document.querySelectorAll('.popup'));
 const namePopup = document.querySelector('.name-popup');
@@ -150,4 +148,4 @@ function sumbitNewItemForm(event){
     addCard(item);
     closePopup(newItemPopup);
 }
-newItemForm.addEventListener('submit', sumbitNewItemForm);
+newItemForm.addEventListener('submit', sumbitNewItemForm); 
