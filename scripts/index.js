@@ -88,7 +88,6 @@ function popupClickHandler(event) {
 function escHandler(event) {
   const openedPopup = document.querySelector('.popup_opened');
   if (event.key === 'Escape') {
-    //console.log('closed');
     closePopup(openedPopup);
   };
 }
