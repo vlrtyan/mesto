@@ -1,6 +1,15 @@
 import Card from '/scripts/Card.js';
 import FormValidator from '/scripts/FormValidator.js';
 
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  inputErrorClass: 'popup__input_invalid',
+  inputErrorBorderClass: 'popup__input_type_error',
+  submitButtonSelector: '.popup__submit-button',
+  submitButtonInvalidClass: 'popup__submit-button_invalid'
+}
+
 const initialCards = [
     {
       name: 'Архыз',
@@ -29,6 +38,7 @@ const initialCards = [
   ];
 
 const elements = document.querySelector('.elements');
+const template = document.querySelector('.template');
 
 initialCards.forEach((item) => {
   const card = new Card(item.name, item.link);
@@ -36,24 +46,18 @@ initialCards.forEach((item) => {
   elements.prepend(cardElement);
 })
 
-
 function createCard(item){
-  const card = new Card(item, template);
-  return card;
+  const card = new Card(item.name, item.link, template.content);
+  const cardElement = card.generateCard();
+  elements.prepend(cardElement);
 }
 
+const formNameValidator = new FormValidator(document.querySelector('.name-popup__form'), config);
+formNameValidator.enableValidation();
+const formNewItemValidator = new FormValidator(document.querySelector('.new-item__form'), config);
+formNewItemValidator.enableValidation();
 
 
-
-
-
-function addCard(item){
-    const element = createCard(item);
-    
-}
-
-
-const popupArray = Array.from(document.querySelectorAll('.popup'));
 const namePopup = document.querySelector('.name-popup');
 const editButton = document.querySelector('.profile__edit-button');
 const nameForm = document.querySelector('.name-popup__form');
@@ -66,12 +70,10 @@ const newItemPopup = document.querySelector('.new-item');
 const addButton = document.querySelector('.profile__add-button');
 const newItemForm = document.querySelector('.new-item__form');
 const placeNameField = document.querySelector('.new-item__input_type_name');
-const placeNameCard = document.querySelector('.element__title');
 const imageField = document.querySelector('.new-item__input_type_link');
-const imageCard = document.querySelector('.element__image');
 
-const imagePopup = document.querySelector('.image-popup');
-const bigImage = document.querySelector('.image-popup__image');
+// const imagePopup = document.querySelector('.image-popup');
+// const bigImage = document.querySelector('.image-popup__image');
 
 window.addEventListener('load', () => {
     document.querySelectorAll('.popup').forEach((popup) => popup.classList.add('popup__transition'));
@@ -97,26 +99,30 @@ function openPopup(popup){
     popup.classList.add('popup_opened');
 }
 
+export { openPopup }
+
 function closePopup(popup){ 
     popup.classList.remove('popup_opened');
     document.removeEventListener('keydown', escHandler);
     popup.removeEventListener('mouseup', popupClickHandler);
 }
 
-function openImagePopup(event){
-    bigImage.setAttribute('src', event.target.getAttribute('src'));
-    bigImage.setAttribute('alt', event.target.closest('.element').textContent);
-    document.querySelector('.image-popup__title').textContent = event.target.closest('.element').textContent;
-    openPopup(imagePopup);
-}
+// function openImagePopup(event){
+//     bigImage.setAttribute('src', event.target.getAttribute('src'));
+//     bigImage.setAttribute('alt', event.target.closest('.element').textContent);
+//     document.querySelector('.image-popup__title').textContent = event.target.closest('.element').textContent;
+//     openPopup(imagePopup);
+// }
 
 editButton.addEventListener('click', () => {
+    formNameValidator.checkSubmitButtonAndClearInputs();
     nameField.value = nameProfile.textContent;
     descriptionField.value = descriptionProfile.textContent;
     openPopup(namePopup);
 })
 
 addButton.addEventListener('click', () => {
+    formNewItemValidator.checkSubmitButtonAndClearInputs();
     placeNameField.value = '';
     imageField.value = '';
     openPopup(newItemPopup);
@@ -145,7 +151,7 @@ function sumbitNewItemForm(event){
     const item = {
         name, link
     }
-    addCard(item);
+    createCard(item);
     closePopup(newItemPopup);
 }
 newItemForm.addEventListener('submit', sumbitNewItemForm); 
