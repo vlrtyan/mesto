@@ -1,7 +1,8 @@
 import { openPopup } from '/scripts/index.js'
 
 class Card {
-    constructor(name, link, template){
+    constructor(name, link, templateSelector){
+        this._templateSelector = templateSelector;
         this._name = name;
         this._link = link;
         this._delete = this._delete.bind(this);
@@ -13,7 +14,7 @@ class Card {
 
     _getTemplate() {
         const cardElement = document
-          .querySelector('.template')
+          .querySelector(this._templateSelector)
           .content
           .querySelector('.element')
           .cloneNode(true);

@@ -7,7 +7,8 @@ const config = {
   inputErrorClass: 'popup__input_invalid',
   inputErrorBorderClass: 'popup__input_type_error',
   submitButtonSelector: '.popup__submit-button',
-  submitButtonInvalidClass: 'popup__submit-button_invalid'
+  submitButtonInvalidClass: 'popup__submit-button_invalid',
+  cardTemplateSelector: '#templateCard'
 }
 
 const initialCards = [
@@ -38,10 +39,10 @@ const initialCards = [
   ];
 
 const elements = document.querySelector('.elements');
-const template = document.querySelector('.template');
+const cardTemplateSelector = '#templateCard';
 
 function createCard(item){
-  const card = new Card(item.name, item.link, '.template');
+  const card = new Card(item.name, item.link, cardTemplateSelector);
   const cardElement = card.generateCard();
   return cardElement;
 }
