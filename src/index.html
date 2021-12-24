@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="./pages/index.css">
+  <!--<link rel="stylesheet" href="./pages/index.css">-->
   <title>Место</title>
 </head>
 <body>
     <div class="page">
         <header class="header">
-          <img class="header__logo" src="./images/header-logo.svg" alt="Назание сайта: Mesto Russia">
+          <img class="header__logo" src="<%=require('./images/header-logo.svg')%>" alt="Назание сайта: Mesto Russia">
         </header>
 
         <main class="content">
           <section class="profile">
-            <img class="profile__avatar" src="./images/avatar.jpg" alt="Кусто в красной шапке">
+            <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Кусто в красной шапке">
             <div class="profile__info">
               <button class="profile__edit-button" type="button">
               </button>
