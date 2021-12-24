@@ -45,7 +45,6 @@ const initialCards = [
     }
   ];
 
-const elements = document.querySelector('.elements');
 const cardTemplateSelector = '#templateCard';
 
 const cardsList = new Section({
@@ -58,15 +57,12 @@ const cardsList = new Section({
 },
 cardsListSection);
 
-cardsList.renderItems();
+cardsList.renderItems(); //отрисовка карточек
 
 function createCard(item){ 
-  const card = new Card(item.name, item.link, cardTemplateSelector, () => {
-    const popupWithImage = new PopupWithImage('.image-popup');
-    popupWithImage.open();
-  });
+  const card = new Card(item.name, item.link, cardTemplateSelector);
   const cardElement = card.generateCard(); 
-  return cardElement; 
+  cardsList.addItem(cardElement); 
 }
 
 const formNameValidator = new FormValidator(document.querySelector('.name-popup__form'), config);
@@ -125,7 +121,7 @@ function sumbitNewItemForm(event){
     const item = {
         name, link
     }
-    elements.prepend(createCard(item));
+    createCard(item);
     newItemPopup.close();
 }
 newItemForm.addEventListener('submit', sumbitNewItemForm); 
