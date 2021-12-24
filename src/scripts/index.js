@@ -3,7 +3,7 @@ import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import Section from './Section.js';
 import Popup from './Popup.js';
-import PopupWithImage from './PopupWithImage';
+import PopupWithImage from './PopupWithImage.js';
 
 const config = {
   formSelector: '.popup__form',
@@ -50,7 +50,10 @@ const cardTemplateSelector = '#templateCard';
 const cardsList = new Section({
   items: initialCards,
   renderer: item => {
-    const card = new Card(item.name, item.link, cardTemplateSelector);
+    const card = new Card(item.name, item.link, cardTemplateSelector, () => {
+      const popupWithImage = new PopupWithImage('.image-popup');
+      popupWithImage.open(item.name, item.link);
+    });
     const cardElement = card.generateCard();
     cardsList.addItem(cardElement);
   },
@@ -60,7 +63,10 @@ cardsListSection);
 cardsList.renderItems(); //отрисовка карточек
 
 function createCard(item){ 
-  const card = new Card(item.name, item.link, cardTemplateSelector);
+  const card = new Card(item.name, item.link, cardTemplateSelector, () => {
+    const popupWithImage = new PopupWithImage('.image-popup');
+    popupWithImage.open(item.name, item.link);
+  });
   const cardElement = card.generateCard(); 
   cardsList.addItem(cardElement); 
 }
