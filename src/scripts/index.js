@@ -3,6 +3,7 @@ import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import Section from './Section.js';
 import Popup from './Popup.js';
+import PopupWithImage from './PopupWithImage';
 
 const config = {
   formSelector: '.popup__form',
@@ -49,7 +50,7 @@ const cardTemplateSelector = '#templateCard';
 
 const cardsList = new Section({
   items: initialCards,
-  renderer: (item) => {
+  renderer: item => {
     const card = new Card(item.name, item.link, cardTemplateSelector);
     const cardElement = card.generateCard();
     cardsList.addItem(cardElement);
@@ -57,20 +58,22 @@ const cardsList = new Section({
 },
 cardsListSection);
 
-// function createCard(item){ 
-//   const card = new Card(item.name, item.link, cardTemplateSelector); 
-//   const cardElement = card.generateCard(); 
-//   return cardElement; 
-// } 
+cardsList.renderItems();
+
+function createCard(item){ 
+  const card = new Card(item.name, item.link, cardTemplateSelector, () => {
+    const popupWithImage = new PopupWithImage('.image-popup');
+    popupWithImage.open();
+  });
+  const cardElement = card.generateCard(); 
+  return cardElement; 
+}
 
 const formNameValidator = new FormValidator(document.querySelector('.name-popup__form'), config);
 formNameValidator.enableValidation();
 const formNewItemValidator = new FormValidator(document.querySelector('.new-item__form'), config);
 formNewItemValidator.enableValidation();
 
-
-
-//const namePopup = document.querySelector('.name-popup');
 const namePopup = new Popup('.name-popup');
 const editButton = document.querySelector('.profile__edit-button');
 const nameForm = document.querySelector('.name-popup__form');
@@ -79,14 +82,13 @@ const nameProfile = document.querySelector('.profile__name');
 const descriptionField = document.querySelector('.name-popup__input_type_description');
 const descriptionProfile = document.querySelector('.profile__description');
 
-//const newItemPopup = document.querySelector('.new-item');
 const newItemPopup = new Popup('.new-item');
 const addButton = document.querySelector('.profile__add-button');
 const newItemForm = document.querySelector('.new-item__form');
 const placeNameField = document.querySelector('.new-item__input_type_name');
 const imageField = document.querySelector('.new-item__input_type_link');
 
-// const imagePopup = document.querySelector('.image-popup');
+//const popupWithImage = new PopupWithImage('.image-popup');
 // const bigImage = document.querySelector('.image-popup__image');
 
 window.addEventListener('load', () => {
