@@ -1,6 +1,6 @@
-import { openPopup } from './index.js'
+//import { openPopup } from './index.js'
 
-class Card {
+export default class Card {
     constructor(name, link, templateSelector){
         this._templateSelector = templateSelector;
         this._name = name;
@@ -52,5 +52,3 @@ class Card {
         return this._element;
     }
 }
-
-export default Card;
