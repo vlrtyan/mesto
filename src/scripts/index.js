@@ -4,6 +4,7 @@ import FormValidator from './FormValidator.js';
 import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
+import UserInfo from './UserInfo.js';
 
 const config = {
   formSelector: '.popup__form',
@@ -84,9 +85,17 @@ const nameProfile = document.querySelector('.profile__name');
 const descriptionField = document.querySelector('.name-popup__input_type_description');
 const descriptionProfile = document.querySelector('.profile__description');
 
-function editProfile(){
-  nameProfile.textContent = nameField.value;
-  descriptionProfile.textContent = descriptionField.value;
+const userInfo = new UserInfo({ userNameSelector: nameField, profileDescriptionSelector: descriptionField });
+
+userInfo.check() //проверка
+//console.log(userInfo.getUserInfo())
+
+
+
+function editProfile(newUserInfo){
+  userInfo.setUserInfo(newUserInfo);
+  // nameProfile.textContent = nameField.value;
+  // descriptionProfile.textContent = descriptionField.value;
   namePopup.close();
 }
 
@@ -112,8 +121,9 @@ window.addEventListener('load', () => {
 
 editButton.addEventListener('click', () => {
     formNameValidator.disableSubmitButtonAndClearInputs();
-    nameField.value = nameProfile.textContent;
-    descriptionField.value = descriptionProfile.textContent;
+    userInfo.getUserInfo();
+    // nameField.value = nameProfile.textContent;
+    // descriptionField.value = descriptionProfile.textContent;
     namePopup.open();
 })
 
@@ -123,3 +133,5 @@ addButton.addEventListener('click', () => {
     imageField.value = '';
     newItemPopup.open();
 })
+
+
