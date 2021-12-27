@@ -1,3 +1,5 @@
+import '../utils/constants.js';
+
 export default class Card {
     constructor(name, link, templateSelector, handleCardClick){
         this._handleCardClick = handleCardClick;

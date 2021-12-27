@@ -1,3 +1,5 @@
+import '../utils/constants.js';
+
 export default class Section {
     constructor({ items, renderer }, containerSelector){
         this._items = items;

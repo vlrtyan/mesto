@@ -1,3 +1,5 @@
+import '../utils/constants.js';
+
 export default class UserInfo {
     constructor({ userNameSelector, profileDescriptionSelector }){
         this._userNameSelector = userNameSelector;
