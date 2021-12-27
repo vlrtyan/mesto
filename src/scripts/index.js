@@ -2,8 +2,8 @@ import '../pages/index.css';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import Section from './Section.js';
-import Popup from './Popup.js';
 import PopupWithImage from './PopupWithImage.js';
+import PopupWithForm from './PopupWithForm.js';
 
 const config = {
   formSelector: '.popup__form',
@@ -76,22 +76,34 @@ formNameValidator.enableValidation();
 const formNewItemValidator = new FormValidator(document.querySelector('.new-item__form'), config);
 formNewItemValidator.enableValidation();
 
-const namePopup = new Popup('.name-popup');
+
+const namePopup = new PopupWithForm('.name-popup', editProfile);
 const editButton = document.querySelector('.profile__edit-button');
-const nameForm = document.querySelector('.name-popup__form');
 const nameField = document.querySelector('.name-popup__input_type_name');
 const nameProfile = document.querySelector('.profile__name');
 const descriptionField = document.querySelector('.name-popup__input_type_description');
 const descriptionProfile = document.querySelector('.profile__description');
 
-const newItemPopup = new Popup('.new-item');
+function editProfile(){
+  nameProfile.textContent = nameField.value;
+  descriptionProfile.textContent = descriptionField.value;
+  namePopup.close();
+}
+
+const newItemPopup = new PopupWithForm('.new-item', addCard);
 const addButton = document.querySelector('.profile__add-button');
-const newItemForm = document.querySelector('.new-item__form');
 const placeNameField = document.querySelector('.new-item__input_type_name');
 const imageField = document.querySelector('.new-item__input_type_link');
 
-//const popupWithImage = new PopupWithImage('.image-popup');
-// const bigImage = document.querySelector('.image-popup__image');
+function addCard(){
+  const name = placeNameField.value;
+    const link = imageField.value;
+    const item = {
+        name, link
+    }
+    createCard(item);
+    newItemPopup.close();
+}
 
 window.addEventListener('load', () => {
     document.querySelectorAll('.popup').forEach((popup) => popup.classList.add('popup__transition'));
@@ -111,23 +123,3 @@ addButton.addEventListener('click', () => {
     imageField.value = '';
     newItemPopup.open();
 })
-
-function sumbitNameForm(event){
-    event.preventDefault();
-    nameProfile.textContent = nameField.value;
-    descriptionProfile.textContent = descriptionField.value;
-    namePopup.close();
-}
-nameForm.addEventListener('submit', sumbitNameForm)
-
-function sumbitNewItemForm(event){
-    event.preventDefault();
-    const name = placeNameField.value;
-    const link = imageField.value;
-    const item = {
-        name, link
-    }
-    createCard(item);
-    newItemPopup.close();
-}
-newItemForm.addEventListener('submit', sumbitNewItemForm); 
