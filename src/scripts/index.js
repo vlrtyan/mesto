@@ -64,7 +64,6 @@ window.addEventListener('load', () => {
 editButton.addEventListener('click', () => {
     formNameValidator.disableSubmitButtonAndClearInputs();
     const userData = userInfo.getUserInfo();
-    console.log(userData);
     nameField.value = userData.name;
     descriptionField.value = userData.description;
     namePopup.open();
