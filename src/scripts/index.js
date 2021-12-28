@@ -38,19 +38,14 @@ formNewItemValidator.enableValidation();
 
 
 const namePopup = new PopupWithForm('.name-popup', editProfile);
+const newItemPopup = new PopupWithForm('.new-item', addCard);
 
 const userInfo = new UserInfo({ userNameSelector: nameProfile, profileDescriptionSelector: descriptionProfile });
 
-
 function editProfile(newUserInfo){
   userInfo.setUserInfo(newUserInfo);
-  // nameProfile.textContent = nameField.value;
-  // descriptionProfile.textContent = descriptionField.value;
   namePopup.close();
 }
-
-const newItemPopup = new PopupWithForm('.new-item', addCard);
-
 
 function addCard(){
   const name = placeNameField.value;
@@ -65,7 +60,6 @@ function addCard(){
 window.addEventListener('load', () => {
     document.querySelectorAll('.popup').forEach((popup) => popup.classList.add('popup__transition'));
   })
-
 
 editButton.addEventListener('click', () => {
     formNameValidator.disableSubmitButtonAndClearInputs();
