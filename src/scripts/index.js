@@ -39,7 +39,7 @@ formNewItemValidator.enableValidation();
 
 const namePopup = new PopupWithForm('.name-popup', editProfile);
 
-const userInfo = new UserInfo({ userNameSelector: nameField, profileDescriptionSelector: descriptionField });
+const userInfo = new UserInfo({ userNameSelector: nameProfile, profileDescriptionSelector: descriptionProfile });
 
 
 function editProfile(newUserInfo){
@@ -69,9 +69,10 @@ window.addEventListener('load', () => {
 
 editButton.addEventListener('click', () => {
     formNameValidator.disableSubmitButtonAndClearInputs();
-    userInfo.getUserInfo();
-    // nameField.value = nameProfile.textContent;
-    // descriptionField.value = descriptionProfile.textContent;
+    const userData = userInfo.getUserInfo();
+    console.log(userData);
+    nameField.value = userData.name;
+    descriptionField.value = userData.description;
     namePopup.open();
 })
 
@@ -81,5 +82,3 @@ addButton.addEventListener('click', () => {
     imageField.value = '';
     newItemPopup.open();
 })
-
-

@@ -1,4 +1,4 @@
-import '../utils/constants.js';
+import { nameField, descriptionField } from '../utils/constants.js';
 
 export default class UserInfo {
     constructor({ userNameSelector, profileDescriptionSelector }){
@@ -6,25 +6,19 @@ export default class UserInfo {
         this._profileDescriptionSelector = profileDescriptionSelector;
     }
 
-    check(){
-        console.log(this._userNameSelector, this._profileDescriptionSelector);
-    }
-
     getUserInfo(){
-        const userInfo = {};
-        userInfo[0] = this._userNameSelector.value;
-        userInfo[1] = this._profileDescriptionSelector.textContent;
+        const userInfo = {name:'name', description:'description'};
+        userInfo[userInfo.name] = this._userNameSelector.textContent;
+        userInfo[userInfo.description] = this._profileDescriptionSelector.textContent;
         return userInfo;
     }
 
     setUserInfo(newUserInfo){
         newUserInfo = {
-            name: document.querySelector('.name-popup__input_type_name').value,
-            description: document.querySelector('.name-popup__input_type_description').value
+            name: nameField.value,
+            description: descriptionField.value
         };
-        // this._userNameSelector.textContent = newUserInfo[0].value;
-        // this._contentInfoSelector.textContent = newUserInfo[1].value;
-        document.querySelector('.profile__name').textContent = newUserInfo.name
-        document.querySelector('.profile__description').textContent = newUserInfo.description;
+        this._userNameSelector.textContent = newUserInfo.name
+        this._profileDescriptionSelector.textContent = newUserInfo.description;
     }
 }
