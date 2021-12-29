@@ -5,3 +5,8 @@
     object-fit: cover;
     object-position: center;
 }
+
+.element__image:hover{
+    opacity: 0.6;
+    transition: 0.2s;
+}
