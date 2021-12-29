@@ -55,7 +55,7 @@ class FormValidator{
         this._submitButtonState(); 
     } 
 
-    disableSubmitButtonAndClearInputs(){
+    resetForm(){
         this._inputsList.forEach((input) => {this._hideError(input)});
         this._disableButton();
         }

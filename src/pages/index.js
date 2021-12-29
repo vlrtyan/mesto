@@ -58,7 +58,7 @@ window.addEventListener('load', () => {
   })
 
 editButton.addEventListener('click', () => {
-    formNameValidator.disableSubmitButtonAndClearInputs();
+    formNameValidator.resetForm();
     const userData = userInfo.getUserInfo();
     nameField.value = userData.name;
     descriptionField.value = userData.description;
@@ -66,7 +66,7 @@ editButton.addEventListener('click', () => {
 })
 
 addButton.addEventListener('click', () => {
-    formNewItemValidator.disableSubmitButtonAndClearInputs();
+    formNewItemValidator.resetForm();
     placeNameField.value = '';
     imageField.value = '';
     newItemPopup.open();
