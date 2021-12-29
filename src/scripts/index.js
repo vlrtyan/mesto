@@ -10,21 +10,17 @@ import {initialCards, config, editButton, nameField, nameProfile, descriptionFie
 const cardsList = new Section({
   items: initialCards,
   renderer: item => {
-    const card = new Card(item.name, item.link, cardTemplateSelector, () => {
-      const popupWithImage = new PopupWithImage('.image-popup');
-      popupWithImage.open(item.name, item.link);
-    });
-    const cardElement = card.generateCard();
-    cardsList.addItem(cardElement);
+    createCard(item);
   },
 },
 cardsListSection);
 
 cardsList.renderItems(); //отрисовка карточек
 
+const popupWithImage = new PopupWithImage('.image-popup');
+
 function createCard(item){ 
   const card = new Card(item.name, item.link, cardTemplateSelector, () => {
-    const popupWithImage = new PopupWithImage('.image-popup');
     popupWithImage.open(item.name, item.link);
   });
   const cardElement = card.generateCard(); 

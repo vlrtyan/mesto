@@ -40,7 +40,7 @@ class FormValidator{
     }
 
     _disableButton(){
-        this._button.disabled;
+        this._button.disabled = true;
         this._button.classList.add(this._config.submitButtonInvalidClass);
     }
 
