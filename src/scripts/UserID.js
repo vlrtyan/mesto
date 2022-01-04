@@ -5,14 +5,17 @@ export default class UserID{
 
     getUserID(){
         return {
-            userID: this._userID
+            id: this.userID,
+            name: this.userName,
+            about: this.userAbout
         }
     }
 
     setUserID(data){
         if (data){
-            this._userID = data._id;
-            this._userName = data.name;
+            this.userID = data._id;
+            this.userName = data.name;
+            this.userAbout = data.about;
         }
     }
 }

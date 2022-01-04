@@ -8,6 +8,11 @@ import UserInfo from '../scripts/UserInfo.js';
 import {initialCards, config, editButton, nameField, nameProfile, descriptionField, descriptionProfile, addButton, placeNameField, imageField, cardsListSection, cardTemplateSelector} from '../utils/constants.js';
 import Api from '../scripts/Api.js';
 import UserID from '../scripts/UserID';
+import { data } from 'autoprefixer';
+
+
+const userID = new UserID();
+console.log(userID);
 
 const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-32',
@@ -65,6 +70,16 @@ const userInfo = new UserInfo({ userNameSelector: nameProfile, profileDescriptio
 function editProfile(newUserInfo){
   userInfo.setUserInfo(newUserInfo);
   namePopup.close();
+  //API
+  api.editUserData({
+    ...data,
+    name: userInfo.getUserInfo().name,
+    about: userInfo.getUserInfo().description
+  })
+  .then(res => {
+    console.log(res)
+  })
+  .catch(err => console.log(`Ошибка при редактировании профиля: ${err}`));
 }
 
 function addCard(){
