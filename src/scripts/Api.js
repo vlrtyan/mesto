@@ -1,3 +1,5 @@
+import { data } from "autoprefixer";
+
 class Api{
     constructor({url, token}){
         this.url = url;
@@ -53,6 +55,27 @@ class Api{
                 return Promise.reject(`Ошибка: ${res.status}`);
             }
         }) 
+    }
+
+    addNewItem(data){
+        return fetch(`${this.url}/cards`, {
+            method: 'POST',
+            headers: {
+                authorization: this.token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: data.name,
+                link: data.link
+            })
+        })
+        .then(res => {
+            if (res.ok){
+                return res.json();
+            } else {
+                return Promise.reject(`Ошибка: ${res.status}`);
+            }
+        })
     }
 }
 

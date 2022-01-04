@@ -61,7 +61,6 @@ function editProfile(newUserInfo){
   namePopup.close();
 //отправка данных на сервер
   api.editUserData({
-    ...data,
     name: userInfo.getUserInfo().name,
     about: userInfo.getUserInfo().description
   })
@@ -73,13 +72,25 @@ function editProfile(newUserInfo){
 
 function addCard(){
   const name = placeNameField.value;
-    const link = imageField.value;
-    const item = {
-        name, link
-    }
-    createCard(item);
+  const link = imageField.value;
+  const item = {
+    name, link
+  }
+  Promise.all([api.getUserData(), api.addNewItem(item)])
+  .then(([userData, newItem]) => {
+    console.log(newItem);
+    const user = userData;
+    const cardsList = new Section ({
+      items: newItem,
+      renderer: (item) => {
+        cardsList.addItem(createCard(item));
+      },
+    }, cardsListSection);
+    cardsList.renderItems();
     newItemPopup.close();
-}
+  })
+  .catch(err => console.log(`Ошибка при добавлении новой карточки: ${err}`))
+  }
 
 window.addEventListener('load', () => {
     document.querySelectorAll('.popup').forEach((popup) => popup.classList.add('popup__transition'));
