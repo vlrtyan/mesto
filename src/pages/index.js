@@ -13,7 +13,7 @@ const api = new Api({
   token: 'f7e9f27f-efd9-4384-a381-5bfd59f30ca5'
 })
 
-//отрисовка краточек с сервера
+//отрисовка карточек с сервера
 function renderInitialCards(){
 Promise.all([api.getUserData(), api.getInitialCards()])
 .then(([userData, initialCards]) => {
