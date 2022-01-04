@@ -7,6 +7,7 @@ import PopupWithForm from '../scripts/PopupWithForm.js';
 import UserInfo from '../scripts/UserInfo.js';
 import {initialCards, config, editButton, nameField, nameProfile, descriptionField, descriptionProfile, addButton, placeNameField, imageField, cardsListSection, cardTemplateSelector} from '../utils/constants.js';
 import Api from '../scripts/Api.js';
+import UserID from '../scripts/UserID';
 
 const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-32',
