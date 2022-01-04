@@ -35,7 +35,7 @@
         <div class="popup name-popup">
           <div class="name-popup__container">
             <button class="popup__close-button" type="button"></button>
-            <h3 class="name-popup__title">Редактировать профиль</h3>
+            <h3 class="name-popup__title popup__title">Редактировать профиль</h3>
             <form class="popup__form name-popup__form" name="edit-profile" novalidate>
               <input 
               type="text" 
@@ -65,7 +65,7 @@
         <div class="popup new-item">
           <div class="new-item__container">
             <button class="popup__close-button" type="button"></button>
-            <h3 class="new-item__title">Новое место</h3>
+            <h3 class="new-item__title popup__title">Новое место</h3>
             <form class="popup__form new-item__form" name="edit-profile" novalidate>
               <input 
               type="text" 
@@ -89,7 +89,36 @@
             </form>
           </div>
         </div>
-    </div>
+
+        <div class="popup avatar">
+          <div class="avatar__container">
+            <button class="popup__close-button" type="button"></button>
+            <h3 class="avatar__title popup__title">Обновить аватар</h3>
+            <form class="popup__form avatar__form" name="avatar" novalidate>
+              <input 
+              type="url" 
+              placeholder="Ссылка" 
+              class="popup__input new-item__input new-item__input_type_link" 
+              name="link"
+              id="place-link"
+              required>
+              <span class="error" id="avatar-link-error"></span>
+              <button class="avatar__submit-button popup__submit-button" type="submit">Сохранить</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="popup confirm">
+          <div class="confirm__container">
+            <button class="popup__close-button" type="button"></button>
+            <h3 class="confirm__title popup__title">Вы уверены?</h3>
+            <form class="popup__form confirm__form" name="avatar" novalidate>
+              <button class="confirm__submit-button popup__submit-button" type="submit">Да</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
 
     <div class="popup image-popup">
       <div class="image-popup__container">
