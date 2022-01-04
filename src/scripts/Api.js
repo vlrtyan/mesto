@@ -7,7 +7,7 @@ class Api{
     getUserData(){
         return fetch(`${this.url}/users/me`, {
             headers: {
-                authorization: this.token;
+                authorization: this.token
             }
         })
         .then(res => {
@@ -20,7 +20,18 @@ class Api{
     }
 
     getInitialCards(){
-        
+        return fetch(`${this.url}/cards`, {
+            headers: {
+                authorization: this.token
+            }
+        })
+        .then(res => {
+            if (res.ok){
+                return res.json();
+            } else {
+                return Promise.reject(`Ошибка: ${res.status}`);
+            }
+        }) 
     }
 }
 
