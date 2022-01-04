@@ -5,46 +5,34 @@ import Section from '../scripts/Section.js';
 import PopupWithImage from '../scripts/PopupWithImage.js';
 import PopupWithForm from '../scripts/PopupWithForm.js';
 import UserInfo from '../scripts/UserInfo.js';
-import {initialCards, config, editButton, nameField, nameProfile, descriptionField, descriptionProfile, addButton, placeNameField, imageField, cardsListSection, cardTemplateSelector} from '../utils/constants.js';
+import {config, editButton, nameField, nameProfile, descriptionField, descriptionProfile, addButton, placeNameField, imageField, cardsListSection, cardTemplateSelector} from '../utils/constants.js';
 import Api from '../scripts/Api.js';
-import UserID from '../scripts/UserID';
-import { data } from 'autoprefixer';
-
-
-const userID = new UserID();
-console.log(userID);
 
 const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-32',
   token: 'f7e9f27f-efd9-4384-a381-5bfd59f30ca5'
 })
 
-api.getUserData()
-.then(res => {
-  console.log(res)
+//отрисовка краточек с сервера
+function renderInitialCards(){
+Promise.all([api.getUserData(), api.getInitialCards()])
+.then(([userData, initialCards]) => {
+  console.log(userData, initialCards);
+  const user = userData;
+  const cardsList = new Section({
+    items: initialCards,
+    renderer: item => {
+      cardsList.addItem(createCard(item));
+    },
+  }, cardsListSection);
+  cardsList.renderItems();
 })
 .catch(err => {
   console.log(err)
 })
+}
 
-api.getInitialCards()
-.then(res => {
-  console.log(res)
-})
-.catch(err => {
-  console.log(err)
-})
-
-
-const cardsList = new Section({
-  items: initialCards,
-  renderer: item => {
-    createCard(item);
-  },
-},
-cardsListSection);
-
-cardsList.renderItems(); //отрисовка карточек
+renderInitialCards();
 
 const popupWithImage = new PopupWithImage('.image-popup');
 
@@ -53,7 +41,7 @@ function createCard(item){
     popupWithImage.open(item.name, item.link);
   });
   const cardElement = card.generateCard(); 
-  cardsList.addItem(cardElement); 
+  return cardElement;
 }
 
 const formNameValidator = new FormValidator(document.querySelector('.name-popup__form'), config);
@@ -67,10 +55,11 @@ const newItemPopup = new PopupWithForm('.new-item', addCard);
 
 const userInfo = new UserInfo({ userNameSelector: nameProfile, profileDescriptionSelector: descriptionProfile });
 
+//редактирование профиля
 function editProfile(newUserInfo){
   userInfo.setUserInfo(newUserInfo);
   namePopup.close();
-  //API
+//отправка данных на сервер
   api.editUserData({
     ...data,
     name: userInfo.getUserInfo().name,

@@ -1,5 +1,3 @@
-import { data } from "autoprefixer";
-
 class Api{
     constructor({url, token}){
         this.url = url;
