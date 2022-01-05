@@ -22,7 +22,7 @@ class Api{
     }
 
     getInitialCards(){
-        return fetch(`${this.url}/cards`, {
+        return fetch(`${this.url}/cards/`, {
             headers: {
                 authorization: this.token
             }
@@ -77,6 +77,24 @@ class Api{
             }
         })
     }
+
+    deleteCard(data){
+        return fetch(`${this.url}/cards/${data._id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: this.token,
+                'Content-Type': 'application/json'
+              },
+        })
+        .then(res => {
+            if (res.ok){
+                return res.json();
+            } else {
+                return Promise.reject(`Ошибка: ${res.status}`);
+            }
+        })
+    }
+    
 }
 
 export default Api

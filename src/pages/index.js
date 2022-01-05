@@ -50,7 +50,12 @@ function createCard(item) {
     handleCardDelete: () => {
       confirmPopup.open();
       confirmPopup.handleConfirmButton(() => {
-        card.delete();
+        api.deleteCard(item)
+          .then(item => {
+            console.log(item);
+            card.delete();
+          })
+          .catch(err => console.log(`Ошибка при удалении карточки: ${err}`));
       });
     }
   }, userID);
