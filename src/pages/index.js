@@ -4,6 +4,7 @@ import FormValidator from '../scripts/FormValidator.js';
 import Section from '../scripts/Section.js';
 import PopupWithImage from '../scripts/PopupWithImage.js';
 import PopupWithForm from '../scripts/PopupWithForm.js';
+import PopupWithConfirm from '../scripts/PopupWithConfirm.js';
 import UserInfo from '../scripts/UserInfo.js';
 import { config, editButton, nameField, nameProfile, descriptionField, descriptionProfile, addButton, placeNameField, imageField, cardsListSection, cardTemplateSelector } from '../utils/constants.js';
 import Api from '../scripts/Api.js';
@@ -36,13 +37,23 @@ function renderInitialCards() {
 
 renderInitialCards();
 
+//создание попапов
 const popupWithImage = new PopupWithImage('.image-popup');
+const confirmPopup = new PopupWithConfirm('.confirm');
 
 //создание карточки
 function createCard(item) {
-  const card = new Card(item, cardTemplateSelector, () => {
+  const card = new Card(item, cardTemplateSelector, {
+    handleCardClick: () => {
       popupWithImage.open(item.name, item.link);
-    }, userID);
+    },
+    handleCardDelete: () => {
+      confirmPopup.open();
+      confirmPopup.handleConfirmButton(() => {
+        card.delete();
+      });
+    }
+  }, userID);
   const cardElement = card.generateCard();
   return cardElement;
 }
@@ -58,7 +69,7 @@ formNewItemValidator.enableValidation();
 const namePopup = new PopupWithForm('.name-popup', editProfile);
 const newItemPopup = new PopupWithForm('.new-item', addCard);
 //const changeAvatarPopup = new PopupWithForm('.avatar', changeAvatar);
-//const confirmPopup = new PopupWithForm('.confirm', confirmDelete);
+
 
 const userInfo = new UserInfo({ userNameSelector: nameProfile, profileDescriptionSelector: descriptionProfile });
 
