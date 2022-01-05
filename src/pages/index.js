@@ -8,6 +8,8 @@ import UserInfo from '../scripts/UserInfo.js';
 import {config, editButton, nameField, nameProfile, descriptionField, descriptionProfile, addButton, placeNameField, imageField, cardsListSection, cardTemplateSelector} from '../utils/constants.js';
 import Api from '../scripts/Api.js';
 
+
+let userID;
 const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-32',
   token: 'f7e9f27f-efd9-4384-a381-5bfd59f30ca5'
@@ -22,6 +24,8 @@ Promise.all([api.getUserData(), api.getInitialCards()])
   const cardsList = new Section({
     items: initialCards,
     renderer: item => {
+      //console.log(item.likes.length);
+      //console.log(item.querySelector('.element__like-counter').value);
       cardsList.addItem(createCard(item));
     },
   }, cardsListSection);
@@ -36,22 +40,26 @@ renderInitialCards();
 
 const popupWithImage = new PopupWithImage('.image-popup');
 
+//создание карточки
 function createCard(item){ 
-  const card = new Card(item.name, item.link, cardTemplateSelector, () => {
+  const card = new Card(item, cardTemplateSelector, () => {
     popupWithImage.open(item.name, item.link);
   });
   const cardElement = card.generateCard(); 
   return cardElement;
 }
 
+//валидация форм
 const formNameValidator = new FormValidator(document.querySelector('.name-popup__form'), config);
 formNameValidator.enableValidation();
 const formNewItemValidator = new FormValidator(document.querySelector('.new-item__form'), config);
 formNewItemValidator.enableValidation();
 
-
+//создание попапов
 const namePopup = new PopupWithForm('.name-popup', editProfile);
 const newItemPopup = new PopupWithForm('.new-item', addCard);
+//const changeAvatarPopup = new PopupWithForm('.avatar', changeAvatar);
+//const confirmPopup = new PopupWithForm('.confirm', confirmDelete);
 
 const userInfo = new UserInfo({ userNameSelector: nameProfile, profileDescriptionSelector: descriptionProfile });
 
@@ -59,7 +67,7 @@ const userInfo = new UserInfo({ userNameSelector: nameProfile, profileDescriptio
 function editProfile(newUserInfo){
   userInfo.setUserInfo(newUserInfo);
   namePopup.close();
-//отправка данных на сервер
+
   api.editUserData({
     name: userInfo.getUserInfo().name,
     about: userInfo.getUserInfo().description
@@ -70,6 +78,7 @@ function editProfile(newUserInfo){
   .catch(err => console.log(`Ошибка при редактировании профиля: ${err}`));
 }
 
+//добавление новой карточки
 function addCard(){
   const name = placeNameField.value;
   const link = imageField.value;
