@@ -6,7 +6,7 @@ import PopupWithImage from '../scripts/PopupWithImage.js';
 import PopupWithForm from '../scripts/PopupWithForm.js';
 import PopupWithConfirm from '../scripts/PopupWithConfirm.js';
 import UserInfo from '../scripts/UserInfo.js';
-import { config, editButton, nameField, nameProfile, descriptionField, descriptionProfile, addButton, placeNameField, imageField, cardsListSection, cardTemplateSelector } from '../utils/constants.js';
+import { config, editButton, nameField, nameProfile, descriptionField, descriptionProfile, addButton, placeNameField, imageField, cardsListSection, cardTemplateSelector, changeAvatarButton, avatarLinkField, avatar } from '../utils/constants.js';
 import Api from '../scripts/Api.js';
 
 
@@ -15,6 +15,13 @@ const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-32',
   token: 'f7e9f27f-efd9-4384-a381-5bfd59f30ca5'
 })
+
+const userInfo = new UserInfo({ userNameSelector: nameProfile, profileDescriptionSelector: descriptionProfile, avatarSelector: avatar });
+
+//загрузить данные профиля с сервера
+api.getUserData()
+.then(res => userInfo.updateUserInfo(res))
+.catch(err => console.log(`Ошибка при обновалении данных профиля: ${err}`))
 
 //отрисовка карточек с сервера
 function renderInitialCards() {
@@ -34,7 +41,6 @@ function renderInitialCards() {
       console.log(err)
     })
 }
-
 renderInitialCards();
 
 //создание попапов
@@ -65,7 +71,7 @@ function createCard(item) {
             item = res;
             console.log('Unlike');
             card.updateNumberOfLikes(res);
-        })
+          })
           .catch(err => console.log(`Ошибка при удалении лайка: ${err}`))
       } else {
         api.putLike(item)
@@ -88,14 +94,16 @@ const formNameValidator = new FormValidator(document.querySelector('.name-popup_
 formNameValidator.enableValidation();
 const formNewItemValidator = new FormValidator(document.querySelector('.new-item__form'), config);
 formNewItemValidator.enableValidation();
+const formChangeAvatarValidator = new FormValidator(document.querySelector('.avatar__form'), config);
 
 //создание попапов
 const namePopup = new PopupWithForm('.name-popup', editProfile);
 const newItemPopup = new PopupWithForm('.new-item', addCard);
-//const changeAvatarPopup = new PopupWithForm('.avatar', changeAvatar);
+const changeAvatarPopup = new PopupWithForm('.avatar', changeAvatar);
 
 
-const userInfo = new UserInfo({ userNameSelector: nameProfile, profileDescriptionSelector: descriptionProfile });
+
+
 
 //редактирование профиля
 function editProfile(newUserInfo) {
@@ -110,6 +118,16 @@ function editProfile(newUserInfo) {
       console.log(res)
     })
     .catch(err => console.log(`Ошибка при редактировании профиля: ${err}`));
+}
+
+//изменение аватара
+function changeAvatar() {
+  api.changeAvatar({
+    avatar: avatarLinkField.value
+  })
+    .then((res) => {
+      userInfo.updateUserInfo(res);
+    })
 }
 
 //добавление новой карточки
@@ -135,9 +153,6 @@ function addCard() {
     .catch(err => console.log(`Ошибка при добавлении новой карточки: ${err}`))
 }
 
-//подтверждение удаления карточки
-//function confirmDelete(){}
-
 window.addEventListener('load', () => {
   document.querySelectorAll('.popup').forEach((popup) => popup.classList.add('popup__transition'));
 })
@@ -155,4 +170,10 @@ addButton.addEventListener('click', () => {
   placeNameField.value = '';
   imageField.value = '';
   newItemPopup.open();
+})
+
+changeAvatarButton.addEventListener('click', () => {
+  formChangeAvatarValidator.resetForm();
+  avatarLinkField.value = '';
+  changeAvatarPopup.open();
 })

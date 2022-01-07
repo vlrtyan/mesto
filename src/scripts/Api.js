@@ -128,6 +128,26 @@ class Api{
             }
         })
     }
+
+    changeAvatar(data){
+        return fetch(`${this.url}/users/me/avatar`, {
+            method: 'PATCH',
+            headers: {
+                authorization: this.token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                avatar: data.avatar
+              })
+        })
+        .then(res => {
+            if (res.ok){
+                return res.json();
+            } else {
+                return Promise.reject(`Ошибка: ${res.status}`);
+            }
+        })
+    }
 }
 
 export default Api
