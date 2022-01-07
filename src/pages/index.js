@@ -103,26 +103,31 @@ const changeAvatarPopup = new PopupWithForm('.avatar', changeAvatar);
 
 //редактирование профиля
 function editProfile(newUserInfo) {
+  namePopup.renderLoading(true);
   api.editUserData({
     name: nameField.value,
     about: descriptionField.value
   })
-    .then(res => {
-      console.log(res)
+    .then(() => {
+      userInfo.setUserInfo(newUserInfo);
+      namePopup.close();
     })
-    .catch(err => console.log(`Ошибка при редактировании профиля: ${err}`));
-  userInfo.setUserInfo(newUserInfo);
-  namePopup.close();
+    .catch(err => console.log(`Ошибка при редактировании профиля: ${err}`))
+    .finally(() => {namePopup.renderLoading(false)});
+  
 }
 
 //изменение аватара
 function changeAvatar() {
+  changeAvatarPopup.renderLoading(true);
   api.changeAvatar({
     avatar: avatarLinkField.value
   })
     .then((res) => {
       userInfo.updateUserInfo(res);
     })
+    .catch(err => console.log(`Ошибка при изменении аватара: ${err}`))
+    .finally(() => {changeAvatarPopup.renderLoading(false)})
 }
 
 //добавление новой карточки
@@ -132,6 +137,7 @@ function addCard() {
   const item = {
     name, link
   }
+  newItemPopup.renderLoading(true);
   Promise.all([api.getUserData(), api.addNewItem(item)])
     .then(([userData, newItem]) => {
       console.log(newItem);
@@ -146,6 +152,7 @@ function addCard() {
       newItemPopup.close();
     })
     .catch(err => console.log(`Ошибка при добавлении новой карточки: ${err}`))
+    .finally(() => newItemPopup.renderLoading(false))
 }
 
 window.addEventListener('load', () => {
@@ -154,7 +161,6 @@ window.addEventListener('load', () => {
 
 editButton.addEventListener('click', () => {
   formNameValidator.resetForm();
-  api
   const userData = userInfo.getUserInfo();
   nameField.value = userData.name;
   descriptionField.value = userData.description;

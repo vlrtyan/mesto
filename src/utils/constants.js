@@ -23,5 +23,5 @@ export const cardsListSection = '.elements';
 export const cardTemplateSelector = '#templateCard';
 
 //попап изменения аватара
-export const changeAvatarButton = document.querySelector('.profile__avatar');
+export const changeAvatarButton = document.querySelector('.profile__avatar-container');
 export const avatarLinkField = document.querySelector('.avatar__input_type_link');

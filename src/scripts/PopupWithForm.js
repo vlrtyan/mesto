@@ -6,6 +6,7 @@ export default class PopupWithForm extends Popup {
         this._form = this._popup.querySelector('.popup__form');
         this._inputsList = Array.from(this._form.querySelectorAll('.popup__input'));
         this._submit = this._submit.bind(this);
+        this._sumbitButton = this._form.querySelector('.popup__submit-button');
     }
 
     _getInputValues(){
@@ -19,6 +20,14 @@ export default class PopupWithForm extends Popup {
     _submit(event){
         event.preventDefault();
         this._submitForm(this._getInputValues());
+    }
+
+    renderLoading(isLoading){
+        if (isLoading){
+            this._sumbitButton.textContent = 'Сохранение...'
+        } else {
+            this._sumbitButton.textContent = 'Сохранить'
+        }
     }
 
     setEventListeners(){
