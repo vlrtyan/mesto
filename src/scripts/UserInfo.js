@@ -1,4 +1,4 @@
-import { nameField, descriptionField, avatarLinkField } from '../utils/constants.js';
+import { nameField, descriptionField } from '../utils/constants.js';
 
 export default class UserInfo {
     constructor({ userNameSelector, profileDescriptionSelector, avatarSelector }){
@@ -7,11 +7,10 @@ export default class UserInfo {
         this._avatarSelector = avatarSelector;
     }
 
-    getUserInfo(data){
-        const userInfo = {name:'name', description:'description', avatar: '#'};
-        userInfo[userInfo.name] = data.name;
-        userInfo[userInfo.description] = data.about;
-        userInfo[userInfo.avatar] = data.avatar;
+    getUserInfo(){
+        const userInfo = {name:'name', description:'description'};
+        userInfo[userInfo.name] = nameField.value;
+        userInfo[userInfo.description] = descriptionField.value;
         return userInfo;
     }
 
@@ -22,10 +21,6 @@ export default class UserInfo {
         };
         this._userNameSelector.textContent = newUserInfo.name
         this._profileDescriptionSelector.textContent = newUserInfo.description;
-    }
-
-    setNewAvatar(data){
-        this._avatarSelector.setAttribute('src', data.avatar);
     }
 
     updateUserInfo(data){

@@ -20,8 +20,8 @@ const userInfo = new UserInfo({ userNameSelector: nameProfile, profileDescriptio
 
 //загрузить данные профиля с сервера
 api.getUserData()
-.then(res => userInfo.updateUserInfo(res))
-.catch(err => console.log(`Ошибка при обновалении данных профиля: ${err}`))
+  .then(res => userInfo.updateUserInfo(res))
+  .catch(err => console.log(`Ошибка при обновлении данных профиля: ${err}`))
 
 //отрисовка карточек с сервера
 function renderInitialCards() {
@@ -88,36 +88,31 @@ function createCard(item) {
   return cardElement;
 }
 
-
 //валидация форм
 const formNameValidator = new FormValidator(document.querySelector('.name-popup__form'), config);
 formNameValidator.enableValidation();
 const formNewItemValidator = new FormValidator(document.querySelector('.new-item__form'), config);
 formNewItemValidator.enableValidation();
 const formChangeAvatarValidator = new FormValidator(document.querySelector('.avatar__form'), config);
+formChangeAvatarValidator.enableValidation();
 
 //создание попапов
 const namePopup = new PopupWithForm('.name-popup', editProfile);
 const newItemPopup = new PopupWithForm('.new-item', addCard);
 const changeAvatarPopup = new PopupWithForm('.avatar', changeAvatar);
 
-
-
-
-
 //редактирование профиля
 function editProfile(newUserInfo) {
-  userInfo.setUserInfo(newUserInfo);
-  namePopup.close();
-
   api.editUserData({
-    name: userInfo.getUserInfo().name,
-    about: userInfo.getUserInfo().description
+    name: nameField.value,
+    about: descriptionField.value
   })
     .then(res => {
       console.log(res)
     })
     .catch(err => console.log(`Ошибка при редактировании профиля: ${err}`));
+  userInfo.setUserInfo(newUserInfo);
+  namePopup.close();
 }
 
 //изменение аватара
@@ -159,6 +154,7 @@ window.addEventListener('load', () => {
 
 editButton.addEventListener('click', () => {
   formNameValidator.resetForm();
+  api
   const userData = userInfo.getUserInfo();
   nameField.value = userData.name;
   descriptionField.value = userData.description;
