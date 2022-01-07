@@ -57,6 +57,25 @@ function createCard(item) {
           })
           .catch(err => console.log(`Ошибка при удалении карточки: ${err}`));
       });
+    },
+    handleCardLike: () => {
+      if (item.likes.some(like => like._id === userID)) {
+        api.removeLike(item)
+          .then(res => {
+            item = res;
+            console.log('Unlike');
+            card.updateNumberOfLikes(res);
+        })
+          .catch(err => console.log(`Ошибка при удалении лайка: ${err}`))
+      } else {
+        api.putLike(item)
+          .then(res => {
+            item = res;
+            console.log('Like');
+            card.updateNumberOfLikes(res);
+          })
+          .catch(err => console.log(`Ошибка при постановке лайка: ${err}`))
+      }
     }
   }, userID);
   const cardElement = card.generateCard();
