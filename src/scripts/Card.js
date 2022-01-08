@@ -54,6 +54,7 @@ export default class Card {
 
     delete(){
         this._element.remove();
+        this._element = null;
     }
 
     updateNumberOfLikes(newData){
