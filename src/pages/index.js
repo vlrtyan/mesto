@@ -18,31 +18,24 @@ const api = new Api({
 })
 
 const userInfo = new UserInfo({ userNameSelector: nameProfile, profileDescriptionSelector: descriptionProfile, avatarSelector: avatar });
+const cardsList = new Section({
+  renderer: item => {
+    cardsList.appendItem(createCard(item));
+  },
+}, cardsListSection);
 
-//загрузить данные профиля с сервера
-api.getUserData()
-  .then(res => userInfo.updateUserInfo(res))
-  .catch(err => console.log(`Ошибка при обновлении данных профиля: ${err}`))
-
-//отрисовка карточек с сервера
-function renderInitialCards() {
-  Promise.all([api.getUserData(), api.getInitialCards()])
-    .then(([userData, initialCards]) => {
-      console.log(userData, initialCards);
-      userID = userData._id;
-      const cardsList = new Section({
-        items: initialCards,
-        renderer: item => {
-          cardsList.appendItem(createCard(item));
-        },
-      }, cardsListSection);
-      cardsList.renderItems();
-    })
-    .catch(err => {
-      console.log(err)
-    })
-}
-renderInitialCards();
+//отрисовка страницы
+Promise.all([api.getUserData(), api.getInitialCards()])
+  .then(([userData, initialCards]) => {
+    console.log(userData, initialCards);
+    userID = userData._id;
+    userInfo.setUserAvatar(userData);
+    userInfo.setUserInfo(userData);
+    cardsList.renderItems(initialCards);
+  })
+  .catch(err => {
+    console.log(`Ошибка при отрисовке страницы: ${err}`)
+  })
 
 //создание попапов
 const popupWithImage = new PopupWithImage('.image-popup');
@@ -105,14 +98,14 @@ const newItemPopup = new PopupWithForm('.new-item', addCard);
 const changeAvatarPopup = new PopupWithForm('.avatar', changeAvatar);
 
 //редактирование профиля
-function editProfile(newUserInfo) {
+function editProfile() {
   namePopup.renderLoading(true);
   api.editUserData({
     name: nameField.value,
     about: descriptionField.value
   })
-    .then(() => {
-      userInfo.setUserInfo(newUserInfo);
+    .then((res) => {
+      userInfo.setUserInfo(res);
       namePopup.close();
     })
     .catch(err => console.log(`Ошибка при редактировании профиля: ${err}`))
@@ -128,6 +121,7 @@ function changeAvatar() {
   })
     .then((res) => {
       userInfo.updateUserInfo(res);
+      changeAvatarPopup.close();
     })
     .catch(err => console.log(`Ошибка при изменении аватара: ${err}`))
     .finally(() => { changeAvatarPopup.renderLoading(false) })
@@ -141,21 +135,14 @@ function addCard() {
     name, link
   }
   newItemPopup.renderLoading(true);
-  Promise.all([api.getUserData(), api.addNewItem(item)])
-    .then(([userData, card]) => {
-      userID = userData._id;
-      const cardsList = new Section({
-        items: card,
-        renderer: card => {
-          cardsList.prependItem(createCard(card));
-        },
-      }, cardsListSection);
+  api.addNewItem(item)
+    .then(card => {
       cardsList.prependItem(createCard(card));
       newItemPopup.close();
     })
     .catch(err => console.log(`Ошибка при добавлении новой карточки: ${err}`))
     .finally(() => newItemPopup.renderLoading(false));
-    
+
 }
 
 window.addEventListener('load', () => {

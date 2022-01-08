@@ -9,23 +9,17 @@ export default class UserInfo {
 
     getUserInfo(){
         const userInfo = {name:'name', description:'description'};
-        userInfo[userInfo.name] = nameField.value;
-        userInfo[userInfo.description] = descriptionField.value;
+        userInfo[userInfo.name] = this._userNameSelector.textContent; 
+        userInfo[userInfo.description] = this._profileDescriptionSelector.textContent;
         return userInfo;
     }
 
-    setUserInfo(newUserInfo){
-        newUserInfo = {
-            name: nameField.value,
-            description: descriptionField.value
-        };
-        this._userNameSelector.textContent = newUserInfo.name
-        this._profileDescriptionSelector.textContent = newUserInfo.description;
-    }
-
-    updateUserInfo(data){
+    setUserInfo(data){
         this._userNameSelector.textContent = data.name;
         this._profileDescriptionSelector.textContent = data.about;
+    }
+
+    setUserAvatar(data){
         this._avatarSelector.setAttribute('src', data.avatar);
     }
 }
