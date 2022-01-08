@@ -18,6 +18,7 @@ module.exports = {
     port: 9080,
     open: true
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {

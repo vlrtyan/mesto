@@ -11,6 +11,7 @@ import Api from '../scripts/Api.js';
 
 
 let userID;
+
 const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-32',
   token: 'f7e9f27f-efd9-4384-a381-5bfd59f30ca5'
@@ -32,7 +33,7 @@ function renderInitialCards() {
       const cardsList = new Section({
         items: initialCards,
         renderer: item => {
-          cardsList.addItem(createCard(item));
+          cardsList.appendItem(createCard(item));
         },
       }, cardsListSection);
       cardsList.renderItems();
@@ -113,8 +114,8 @@ function editProfile(newUserInfo) {
       namePopup.close();
     })
     .catch(err => console.log(`Ошибка при редактировании профиля: ${err}`))
-    .finally(() => {namePopup.renderLoading(false)});
-  
+    .finally(() => { namePopup.renderLoading(false) });
+
 }
 
 //изменение аватара
@@ -127,7 +128,7 @@ function changeAvatar() {
       userInfo.updateUserInfo(res);
     })
     .catch(err => console.log(`Ошибка при изменении аватара: ${err}`))
-    .finally(() => {changeAvatarPopup.renderLoading(false)})
+    .finally(() => { changeAvatarPopup.renderLoading(false) })
 }
 
 //добавление новой карточки
@@ -139,20 +140,20 @@ function addCard() {
   }
   newItemPopup.renderLoading(true);
   Promise.all([api.getUserData(), api.addNewItem(item)])
-    .then(([userData, newItem]) => {
-      console.log(newItem);
-      const user = userData;
+    .then(([userData, card]) => {
+      userID = userData._id;
       const cardsList = new Section({
-        items: newItem,
-        renderer: (item) => {
-          cardsList.addItem(createCard(item));
+        items: card,
+        renderer: card => {
+          cardsList.prependItem(createCard(card));
         },
       }, cardsListSection);
-      cardsList.renderItems();
+      cardsList.prependItem(createCard(card));
       newItemPopup.close();
     })
     .catch(err => console.log(`Ошибка при добавлении новой карточки: ${err}`))
-    .finally(() => newItemPopup.renderLoading(false))
+    .finally(() => newItemPopup.renderLoading(false));
+    
 }
 
 window.addEventListener('load', () => {

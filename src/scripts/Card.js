@@ -44,7 +44,6 @@ export default class Card {
         } else {
             // МОЯ КАРТА
             this._element.querySelector('.element__delete-button').addEventListener('click', this._handleCardDelete);
-
         }
     }
 
