@@ -71,6 +71,7 @@ function createCard(item) {
           .then(res => {
             item = res;
             console.log('Unlike');
+            card.like();
             card.updateNumberOfLikes(res);
           })
           .catch(err => console.log(`Ошибка при удалении лайка: ${err}`))
@@ -79,6 +80,7 @@ function createCard(item) {
           .then(res => {
             item = res;
             console.log('Like');
+            card.like();
             card.updateNumberOfLikes(res);
           })
           .catch(err => console.log(`Ошибка при постановке лайка: ${err}`))
