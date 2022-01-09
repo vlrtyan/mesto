@@ -120,7 +120,7 @@ function changeAvatar() {
     avatar: avatarLinkField.value
   })
     .then((res) => {
-      userInfo.updateUserInfo(res);
+      userInfo.setUserAvatar(res);
       changeAvatarPopup.close();
     })
     .catch(err => console.log(`Ошибка при изменении аватара: ${err}`))
